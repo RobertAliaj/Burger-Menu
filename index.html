@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: darkslategrey;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .menu-btn {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+            transition: all .5s ease-in-out;
+            border: 3px solid #fff;
+            border-radius: 10px;
+        }
+
+        .menu-btn-burger {
+            width: 50px;
+            height: 6px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+            transition: all .5s ease-in-out;
+        }
+
+        .menu-btn-burger::before,
+        .menu-btn-burger::after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 6px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(255, 101, 47, .2);
+            transition: all .5s ease-in-out;
+        }
+
+
+        .menu-btn-burger::before {
+            transform: translateY(-16px);
+        }
+
+        .menu-btn-burger::after {
+            transform: translateY(16px);
+        }
+
+
+        /* diese Eingenschaft wird auf .menu-btn-burger nur angewendet wenn das übergeordnete Element diese beide Klassen hat */
+        /* Beide Klassen bekommt das übergeordnete Element wenn da drauf geklickt wird, erst dann erkennt der   Css das das ein übergeordnetes Element ist */
+        /* if(übergeordnete Element von ".menu-btn-burger") dann kriegt die  ".menu-btn-burger" klasse die unteren Eigenschaften */
+        .menu-btn.open .menu-btn-burger {
+            /* transform: translate(0px); */
+            background: transparent;
+            box-shadow: none;
+        }
+
+
+        .menu-btn.open .menu-btn-burger::before {
+            transform: rotate(45deg);
+        }
+
+
+        .menu-btn.open .menu-btn-burger::after {
+            transform: rotate(-45deg);
+        }
+
+
+        /* .menu-btn.open .menu-btn-burger::before {
+            transform: rotate(45deg) translate(35px, -35px);
+        }
+
+
+        .menu-btn.open .menu-btn-burger::after {
+            transform: rotate(-45deg) translate(35px, 35px);
+        } */
+    </style>
+
+    <script>
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            let menuOpen = false;
+
+            menuBtn.addEventListener('click', () => {
+                if (!menuOpen) {
+                    menuBtn.classList.add('open');
+                    menuOpen = true;
+                } else {
+                    menuBtn.classList.remove('open');
+                    menuOpen = false;
+                }
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+
+    <div class="menu-btn" id="menu-btn">
+        <div class="menu-btn-burger"></div>
+    </div>
+
+</body>
+
+</html>
